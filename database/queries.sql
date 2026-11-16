@@ -43,3 +43,21 @@ insert into warehouses(warehouse_name,location) values
 ('North warehouse','Calicut'),
 ('South warehouse','Trivandrum');
 select * from warehouses;
+
+-- ================== Inventory Table =============================
+
+create table inventory(inventory_id int primary key auto_increment, product_id int not null, warehouse_id int not null, quantity int not null default 0,
+updated_at timestamp default current_timestamp on update current_timestamp, foreign key(product_id) references products(product_id),
+foreign key(warehouse_id) references warehouses(warehouse_id), unique(product_id,warehouse_id));
+
+describe inventory;
+
+insert into inventory(product_id,warehouse_id,quantity) values
+(1,1,50),
+(1,2,30),
+(2,1,100),
+(2,3,75),
+(3,1,150),
+(4,2,40),
+(5,3,25);
+select * from inventory;
