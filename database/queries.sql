@@ -30,3 +30,16 @@ insert into products(product_name,sku,category,price) values
 ('Samsung Monitor','MON001','Electronics',12500.00),
 ('Canon Printer','PRI001','Electronics',8500.00);
 select * from products;
+
+-- ======================== Warehouses Table =========================
+
+create table warehouses(warehouse_id int primary key auto_increment, warehouse_name varchar(100) not null,location varchar(50) not null,
+created_at timestamp default current_timestamp);
+
+describe warehouses;
+
+insert into warehouses(warehouse_name,location) values
+('Main warehouse','Kochi'),
+('North warehouse','Calicut'),
+('South warehouse','Trivandrum');
+select * from warehouses;
