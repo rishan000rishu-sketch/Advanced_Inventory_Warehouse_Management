@@ -76,3 +76,18 @@ insert into purchase_orders(supplier_id,order_date,status) values
 (3,'2026-11-17','Pending');
 select * from purchase_orders;
 
+-- =========================== Purchase_order_item Table ====================================
+
+create table purchase_order_items(po_item_id int primary key auto_increment,purchase_order_id int,product_id int,quantity int default 0 not null,unit_price decimal(10,2),
+foreign key(purchase_order_id) references purchase_orders(purchase_order_id), foreign key(product_id) references products(product_id));
+
+describe purchase_order_items;
+
+INSERT INTO purchase_order_items(purchase_order_id, product_id, quantity, unit_price)
+VALUES
+(1, 1, 10, 55000.00),
+(1, 2, 20, 1200.50),
+(1, 3, 15, 750.00),
+(2, 4, 5, 12500.00),
+(2, 5, 3, 8500.00);
+select * from purchase_order_items;
