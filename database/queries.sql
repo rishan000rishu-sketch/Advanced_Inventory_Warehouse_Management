@@ -126,3 +126,21 @@ VALUES
 (4, 1, 1, 58000.00),
 (5, 2, 10, 1300.00);
 select * from sales_order_items;
+
+-- =============================== Stock_movements =============================
+
+create table stock_movements(movement_id int primary key auto_increment,product_id int not null,warehouse_id int not null,
+movement_type varchar(20) not null,quantity int not null,movement_date timestamp default current_timestamp,reference_type varchar(30),reference_id int,
+foreign key(product_id) references products(product_id), foreign key(warehouse_id) references warehouses(warehouse_id));
+
+desc stock_movements;
+
+INSERT INTO stock_movements(product_id, warehouse_id, movement_type, quantity, reference_type, reference_id) VALUES
+(1, 1, 'IN', 20, 'Purchase', 1),
+(2, 1, 'IN', 30, 'Purchase', 1),
+(3, 1, 'IN', 15, 'Purchase', 1),
+(1, 1, 'OUT', 5, 'Sale', 1),
+(2, 1, 'OUT', 10, 'Sale', 1),
+(4, 2, 'IN', 10, 'Purchase', 2),
+(5, 3, 'OUT', 2, 'Sale', 3);
+select * from stock_movements;
