@@ -61,3 +61,18 @@ insert into inventory(product_id,warehouse_id,quantity) values
 (4,2,40),
 (5,3,25);
 select * from inventory;
+
+-- ======================== Purchase_orders Table =============================
+
+create table purchase_orders(purchase_order_id int primary key auto_increment,supplier_id int, order_date date not null,status varchar(50) default 'pending',
+created_at timestamp default current_timestamp, foreign key(supplier_id) references suppliers(supplier_id));
+
+describe purchase_orders;
+
+insert into purchase_orders(supplier_id,order_date,status) values
+(1,'2026-11-16','Pending'),
+(2,'2026-11-16','Approved'),
+(1,'2026-11-17','Received'),
+(3,'2026-11-17','Pending');
+select * from purchase_orders;
+
