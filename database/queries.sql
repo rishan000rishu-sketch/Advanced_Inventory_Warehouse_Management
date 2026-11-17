@@ -91,3 +91,19 @@ VALUES
 (2, 4, 5, 12500.00),
 (2, 5, 3, 8500.00);
 select * from purchase_order_items;
+
+-- ============================= Sales_orders Table==========================
+
+create table sales_orders(sales_order_id int primary key auto_increment,customer_name varchar(80),order_date date,status varchar(20) default 'pending',
+created_at timestamp default current_timestamp);
+
+describe sales_orders;
+
+INSERT INTO sales_orders (customer_name, order_date, status)
+VALUES
+('Arun Kumar', '2026-11-16', 'Pending'),
+('Rahul Nair', '2026-11-16', 'Approved'),
+('Meera Thomas', '2026-11-17', 'Shipped'),
+('Anjali Menon', '2026-11-17', 'Pending'),
+('Vishnu Raj', '2026-11-17', 'Delivered');
+select * from sales_orders;
