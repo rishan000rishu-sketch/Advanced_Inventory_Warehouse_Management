@@ -92,7 +92,7 @@ VALUES
 (2, 5, 3, 8500.00);
 select * from purchase_order_items;
 
--- ============================= Sales_orders Table==========================
+-- ============================= Sales_orders Table ==========================
 
 create table sales_orders(sales_order_id int primary key auto_increment,customer_name varchar(80),order_date date,status varchar(20) default 'pending',
 created_at timestamp default current_timestamp);
@@ -107,3 +107,22 @@ VALUES
 ('Anjali Menon', '2026-11-17', 'Pending'),
 ('Vishnu Raj', '2026-11-17', 'Delivered');
 select * from sales_orders;
+
+-- ================================ Sales_order_items Table ============================
+
+create table sales_order_items(sales_item_id int primary key auto_increment,sales_order_id int,product_id int,quantity int default 0 not null,unit_price decimal(10,2),
+foreign key(sales_order_id) references sales_orders(sales_order_id),foreign key(product_id) references products(product_id));
+
+desc sales_order_items;
+
+INSERT INTO sales_order_items
+(sales_order_id, product_id, quantity, unit_price)
+VALUES
+(1, 1, 2, 58000.00),
+(1, 2, 5, 1300.00),
+(2, 3, 3, 850.00),
+(2, 4, 2, 13000.00),
+(3, 5, 1, 9000.00),
+(4, 1, 1, 58000.00),
+(5, 2, 10, 1300.00);
+select * from sales_order_items;
