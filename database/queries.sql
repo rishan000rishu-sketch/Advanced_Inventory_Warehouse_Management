@@ -163,3 +163,27 @@ INSERT INTO users(username, email, password_hash, role) VALUES
 ('staff1', 'staff@example.com', 'temporary_hash_3', 'Staff');
 select * from users;
 
+-- ================================ Audit_logs Table ===========================================
+
+CREATE TABLE audit_logs (
+    log_id INT PRIMARY KEY AUTO_INCREMENT,
+    user_id INT,
+    action VARCHAR(100) NOT NULL,
+    table_name VARCHAR(50),
+    record_id INT,
+    details TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+    FOREIGN KEY (user_id)
+        REFERENCES users(user_id)
+);
+
+desc audit_logs;
+
+INSERT INTO audit_logs(user_id, action, table_name, record_id, details) VALUES
+(1, 'CREATE', 'products', 1, 'Admin created a new product'),
+(2, 'UPDATE', 'inventory', 1, 'Warehouse manager updated stock quantity'),
+(3, 'CREATE', 'sales_orders', 1, 'Staff created a sales order'),
+(1, 'UPDATE', 'suppliers', 2, 'Admin updated supplier information'),
+(2, 'DELETE', 'products', 5, 'Warehouse manager deleted a product');
+select * from audit_logs;
