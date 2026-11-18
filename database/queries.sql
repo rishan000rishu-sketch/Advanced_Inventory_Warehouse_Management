@@ -3,6 +3,11 @@
 create database inventory_management;
 use inventory_management;
 
+--                       =====================================
+--                                   Tables Creation
+--                       =====================================
+
+
 -- =========================== Suppliers table =================================
 
 create table suppliers(supplier_id int PRIMARY KEY auto_increment, supplier_name varchar(100) not null,
@@ -144,3 +149,17 @@ INSERT INTO stock_movements(product_id, warehouse_id, movement_type, quantity, r
 (4, 2, 'IN', 10, 'Purchase', 2),
 (5, 3, 'OUT', 2, 'Sale', 3);
 select * from stock_movements;
+
+-- ================================== Users Table ========================================
+
+CREATE TABLE users (user_id INT PRIMARY KEY AUTO_INCREMENT,username VARCHAR(50) NOT NULL UNIQUE,email VARCHAR(100) NOT NULL UNIQUE,
+    password_hash VARCHAR(255) NOT NULL,role VARCHAR(30) NOT NULL DEFAULT 'Staff',created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP);
+
+desc users;
+
+INSERT INTO users(username, email, password_hash, role) VALUES
+('admin', 'admin@example.com', 'temporary_hash_1', 'Admin'),
+('manager1', 'manager@example.com', 'temporary_hash_2', 'Warehouse Manager'),
+('staff1', 'staff@example.com', 'temporary_hash_3', 'Staff');
+select * from users;
+
