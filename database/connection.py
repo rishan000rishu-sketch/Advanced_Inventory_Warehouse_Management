@@ -21,12 +21,12 @@ def get_connection():
     except pymysql.MySQLError as e:
         print(f"Database connection failed: {e}")
         return None
+if __name__ == '__main__':
+    connection = get_connection()
+    if connection:
+        print('Database connected successfully!')
 
-connection = get_connection()
-if connection:
-    print('Database connected successfully!')
-
-    connection.close()
-    print('Database connection closed')
-else:
-    print('Unable to connect to database!')
+        connection.close()
+        print('Database connection closed')
+    else:
+        print('Unable to connect to database!')
