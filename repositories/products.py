@@ -23,3 +23,29 @@ def get_all_products():
         if connection:
             connection.close()
 
+def create_product(product_name,sku,category,price):
+    connection = get_connection()
+
+    if connection is None:
+        return None
+
+    try:
+        with connection.cursor() as cursor:
+            query = """
+                INSERT INTO products (product_name,sku,category,price)
+                VALUES(%s,%s,%s,%s)
+            """
+
+            cursor.execute(query,(product_name,sku,category,price))
+
+            connection.commit()
+            return cursor.lastrowid
+
+    except pymysql.MySQLError as e:
+        connection.rollback()
+        print(f'Error creating produc: {e}')
+        return None
+
+    finally:
+        connection.close()
+        
