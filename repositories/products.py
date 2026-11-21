@@ -31,6 +31,18 @@ def create_product(product_name,sku,category,price):
 
     try:
         with connection.cursor() as cursor:
+
+            check_query = """
+                SELECT product_id FROM products
+                WHERE sku = %s
+            """
+
+            cursor.execute(check_query,(sku,))
+
+            if cursor.fetchone():
+                print(f'SKU {sku} already exists!')
+                return None
+
             query = """
                 INSERT INTO products (product_name,sku,category,price)
                 VALUES(%s,%s,%s,%s)
@@ -41,11 +53,15 @@ def create_product(product_name,sku,category,price):
             connection.commit()
             return cursor.lastrowid
 
+    except pymysql.err.IntegrityError as e:
+        connection.rollback()
+        print(f'Integrity error: {e}')
+        return None
+
     except pymysql.MySQLError as e:
         connection.rollback()
-        print(f'Error creating produc: {e}')
+        print(f'Database error: {e}')
         return None
 
     finally:
         connection.close()
-        
