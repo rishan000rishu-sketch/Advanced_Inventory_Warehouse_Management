@@ -1,8 +1,23 @@
 from repositories.products import (
-    get_all_products
+    get_all_products,
+    create_product
 )
 
 def main():
+
+    product_id = create_product(
+        "Lenovo Laptop",
+        "LAP006",
+        "Electronics",
+        62000.0
+    )
+
+    if product_id:
+        print(f'Project created successfully! ID: {product_id}')
+    else:
+        print('Product creation failed')
+
+    print('\n----- PRODUCT LIST -----')
 
     products = get_all_products()
 
